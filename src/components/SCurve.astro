@@ -1,0 +1,54 @@
+---
+// Illustrative S-curve: planned, actual to data date, forecast with P50–P80 band.
+---
+<figure class="scurve">
+  <svg viewBox="0 0 520 320" role="img" aria-labelledby="sc-t sc-d">
+    <title id="sc-t">Cumulative progress S-curve</title>
+    <desc id="sc-d">Planned progress, actual progress up to the data date, and a Monte Carlo forecast band between P50 and P80 finish dates.</desc>
+    <g class="grid">
+      <line x1="48" y1="40" x2="500" y2="40" /><line x1="48" y1="110" x2="500" y2="110" />
+      <line x1="48" y1="180" x2="500" y2="180" /><line x1="48" y1="250" x2="500" y2="250" />
+    </g>
+    <g class="ticks">
+      <text x="40" y="44">100%</text><text x="40" y="114">75%</text>
+      <text x="40" y="184">50%</text><text x="40" y="254">25%</text><text x="40" y="294">0%</text>
+    </g>
+    <line class="axis" x1="48" y1="290" x2="500" y2="290" />
+    <path class="band" d="M250 205 C 310 150, 380 70, 440 42 L 490 40 C 420 90, 340 160, 250 205 Z" />
+    <path class="planned" d="M48 290 C 130 284, 180 225, 235 160 S 330 48, 390 40 L 500 40" />
+    <path class="actual" d="M48 290 C 140 287, 200 245, 250 205" />
+    <path class="forecast" d="M250 205 C 315 150, 385 70, 460 41" />
+    <line class="dd" x1="250" y1="30" x2="250" y2="290" />
+    <text class="lbl" x="256" y="300">Data date</text>
+    <circle class="p" cx="460" cy="41" r="4" /><text class="lbl" x="440" y="28">P50</text>
+    <circle class="p" cx="490" cy="40" r="4" /><text class="lbl" x="478" y="28">P80</text>
+  </svg>
+  <figcaption>
+    <span><i class="k k--plan"></i>Planned</span>
+    <span><i class="k k--act"></i>Actual</span>
+    <span><i class="k k--fc"></i>Forecast</span>
+    <span><i class="k k--band"></i>P50–P80 range</span>
+  </figcaption>
+</figure>
+
+<style>
+  .scurve { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.25rem 1rem; }
+  svg { width: 100%; height: auto; font-family: var(--font); }
+  .grid line { stroke: #eceef5; }
+  .axis { stroke: #b9bdd2; }
+  .ticks text { font-size: 11px; fill: var(--muted); text-anchor: end; }
+  .planned { fill: none; stroke: #b9bdd2; stroke-width: 2.5; stroke-dasharray: 6 5; }
+  .actual { fill: none; stroke: var(--violet); stroke-width: 3.5; }
+  .forecast { fill: none; stroke: var(--violet); stroke-width: 2.5; stroke-dasharray: 2 5; stroke-linecap: round; }
+  .band { fill: rgba(242,178,51,.22); }
+  .dd { stroke: var(--navy); stroke-width: 1.5; }
+  .p { fill: var(--flag); stroke: #fff; stroke-width: 2; }
+  .lbl { font-size: 11px; font-weight: 600; fill: var(--navy); }
+  figcaption { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin-top: .75rem; font-size: .8rem; color: var(--muted); }
+  figcaption span { display: inline-flex; align-items: center; gap: .45rem; }
+  .k { display: inline-block; width: 1.4rem; height: 0; border-top: 2.5px solid; }
+  .k--plan { border-color: #b9bdd2; border-top-style: dashed; }
+  .k--act { border-color: var(--violet); border-top-width: 3.5px; }
+  .k--fc { border-color: var(--violet); border-top-style: dotted; }
+  .k--band { height: .7rem; border: 0; background: rgba(242,178,51,.35); border-radius: 2px; }
+</style>

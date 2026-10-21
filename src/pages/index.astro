@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroSchedule from '../components/HeroSchedule.astro';
+import SCurve from '../components/SCurve.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const problems = [
+  {
+    title: 'Too many hands in one file',
+    text: 'On a project with dozens of subcontractors, updates arrive by email and spreadsheet and get keyed into P6 by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
+  },
+  {
+    title: 'Changes hide in the logic',
+    text: 'A shortened lag or a relationship switched from finish-to-start to start-to-start can absorb weeks of delay without a single date looking wrong. These edits are easy to make and hard to spot.',
+  },
+  {
+    title: 'Analysis comes too late',
+    text: "By the time the update is merged, checked and analysed, the period is half over. Owners and main contractors end up reacting to last month's picture.",
+  },
+];
+
+const steps = [
+  { title: 'Open the update period', text: 'The planning admin loads the current P6 schedule and sets a deadline.' },
+  { title: 'Invite by scope', text: 'Each subcontractor and engineer gets an email with access to their own activities only.' },
+  { title: 'Update progress', text: 'Actual dates, percent complete and remaining durations, entered where the work is done.' },
+  { title: 'Review logic changes', text: 'Any change to a link, lag or relationship is flagged and waits for admin approval.' },
+  { title: 'Close and analyse', text: 'S-curve, earned value and Monte Carlo forecasts run as soon as the period closes.' },
+  { title: 'Merge back to P6', text: 'All approved updates are merged into one P6 schedule, ready to download and share.' },
+];
+
+const capabilities = [
+  { title: 'Scope-based access', text: 'Every user sees and edits only the activities they are responsible for, on the projects they are invited to.' },
+  { title: 'Change control with an audit trail', text: 'Who changed what, when, and who approved it. Logic edits never reach the schedule unreviewed.' },
+  { title: 'S-curve and earned value', text: 'Planned versus actual progress, SPI and CPI, recalculated for every update period.' },
+  { title: 'Monte Carlo risk forecast', text: 'P50 and P80 finish dates based on the current schedule, so you can see how much float is left.' },
+  { title: 'AI-assisted actions', text: 'Plain-language summaries of what changed and suggested follow-ups for late or slipping scopes.' },
+];
+
+const audiences = [
+  { title: 'Owners and employers', text: 'A schedule you can trust each month, with every change explained and approved.' },
+  { title: 'Main contractors', text: 'One update cycle for all subcontractors, without retyping their input into P6.' },
+  { title: 'Project management consultants', text: 'Independent visibility of progress, logic changes and forecast finish dates.' },
+  { title: 'Subcontractors', text: 'A simple screen for their own scope instead of spreadsheets and email chains.' },
+];
+---
+<Base
+  title="POKO | Schedule update control on Primavera P6"
+  description="POKO runs every schedule update on top of Primavera P6. Subcontractors update their own scope, logic changes wait for approval, and S-curve, EVM and Monte Carlo analysis is ready when the period closes."
+>
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__copy">
+        <h1>Know exactly what changed in your schedule, and why.</h1>
+        <p class="hero__lede">
+          POKO runs every schedule update on top of Primavera P6. Each subcontractor updates only their own scope,
+          logic changes wait for approval, and the analysis is ready the moment the period closes.
+        </p>
+        <div class="hero__actions">
+          <a href="/request-demo" class="btn btn--light">Request a demo</a>
+          <a href="/platform" class="btn btn--ghost-light">See the platform</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <HeroSchedule />
+      </div>
+    </div>
+  </section>
+
+  <section class="truth">
+    <div class="wrap truth__inner">
+      <p class="truth__claim">POKO doesn't replace Primavera P6. It controls how P6 gets updated.</p>
+      <ol class="truth__flow" aria-label="How POKO works with P6">
+        <li><strong>Your P6 schedule</strong><span>stays the single source of truth</span></li>
+        <li><strong>Scoped updates in POKO</strong><span>reviewed, approved, analysed</span></li>
+        <li><strong>One merged P6 schedule</strong><span>ready to share</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Why schedule updates break down on large projects</h2>
+        <p>The tools for planning are mature. The process for updating a shared schedule every month is not.</p>
+      </div>
+      <div class="problems">
+        {problems.map((p) => (
+          <article>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>One update period, start to finish</h2>
+        <p>The same six steps every period, with every input traceable to the person who made it.</p>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class={i === 3 ? 'is-flag' : ''}>
+            <span class="steps__n">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="wrap caps">
+      <div>
+        <div class="section__head">
+          <h2>Built for planning teams, not just planners</h2>
+        </div>
+        <dl class="caps__list">
+          {capabilities.map((c) => (
+            <div>
+              <dt>{c.title}</dt>
+              <dd>{c.text}</dd>
+            </div>
+          ))}
+        </dl>
+        <a href="/platform" class="caps__more">Explore the platform</a>
+      </div>
+      <div class="caps__visual">
+        <SCurve />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="who-its-for">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Who uses POKO</h2>
+        <p>Everyone in the update cycle works in the same place, each with the access their role needs.</p>
+      </div>
+      <ul class="who">
+        {audiences.map((a) => (
+          <li>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero { background: var(--navy); color: rgba(255,255,255,.82); overflow: hidden; }
+  .hero__inner {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(2rem, 5vw, 4rem);
+    align-items: center; padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  .hero h1 { color: #fff; font-size: clamp(2.4rem, 4.6vw, 3.75rem); }
+  .hero__lede { margin-top: 1.5rem; font-size: 1.2rem; max-width: 34rem; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2.25rem; }
+  @media (max-width: 1000px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero h1 { max-width: 40rem; }
+  }
+
+  .truth { border-bottom: 1px solid var(--line); }
+  .truth__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 2rem 4rem; align-items: center; padding-block: 3rem; }
+  .truth__claim { font-size: clamp(1.3rem, 2.2vw, 1.6rem); font-weight: 600; font-stretch: 106%; color: var(--navy); line-height: 1.3; }
+  .truth__flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .truth__flow li { position: relative; padding: 1rem 1.5rem 1rem 0; display: grid; gap: .2rem; }
+  .truth__flow li:not(:last-child)::after {
+    content: ''; position: absolute; right: .6rem; top: 1.55rem; width: .55rem; height: .55rem;
+    border-top: 2px solid var(--violet); border-right: 2px solid var(--violet); transform: rotate(45deg);
+  }
+  .truth__flow strong { color: var(--navy); font-weight: 650; }
+  .truth__flow span { color: var(--muted); font-size: .92rem; }
+  @media (max-width: 860px) {
+    .truth__inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .truth__flow { grid-template-columns: 1fr; }
+    .truth__flow li { padding: .6rem 0 .6rem 1.4rem; border-left: 2px solid var(--line); }
+    .truth__flow li::after { display: none; }
+  }
+
+  .problems { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3rem); }
+  .problems article { border-top: 3px solid var(--navy); padding-top: 1.25rem; }
+  .problems p { margin-top: .75rem; color: var(--muted); }
+  @media (max-width: 860px) { .problems { grid-template-columns: 1fr; } }
+
+  .steps {
+    list-style: none; margin: 0; padding: 0; counter-reset: s;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+  }
+  .steps li { position: relative; padding: 0 1.25rem 0 0; }
+  .steps li::before {
+    content: ''; position: absolute; left: 2.25rem; right: 0; top: 1.1rem; height: 2px; background: var(--line);
+  }
+  .steps li:last-child::before { display: none; }
+  .steps__n {
+    position: relative; display: grid; place-items: center; width: 2.25rem; height: 2.25rem;
+    border-radius: 50%; background: var(--navy); color: #fff; font-weight: 700; margin-bottom: 1.1rem;
+  }
+  .steps .is-flag .steps__n { background: var(--flag); color: var(--navy); }
+  .steps h3 { font-size: 1.05rem; }
+  .steps p { margin-top: .5rem; color: var(--muted); font-size: .95rem; }
+  @media (max-width: 1000px) {
+    .steps { grid-template-columns: 1fr 1fr 1fr; row-gap: 2.5rem; }
+    .steps li:nth-child(3)::before { display: none; }
+  }
+  @media (max-width: 640px) {
+    .steps { grid-template-columns: 1fr; row-gap: 0; }
+    .steps li { padding: 0 0 2rem 3.25rem; }
+    .steps__n { position: absolute; left: 0; top: 0; margin: 0; }
+    .steps li::before, .steps li:nth-child(3)::before { display: block; left: 1.07rem; top: 2.25rem; bottom: 0; right: auto; width: 2px; height: auto; }
+    .steps li:last-child::before { display: none; }
+  }
+
+  .caps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .caps .section__head { margin-bottom: 2rem; }
+  .caps__list { margin: 0; display: grid; gap: 1.4rem; }
+  .caps__list div { padding-left: 1.1rem; border-left: 3px solid var(--violet); }
+  .caps__list dt { font-weight: 650; color: var(--navy); font-size: 1.08rem; }
+  .caps__list dd { margin: .25rem 0 0; color: var(--muted); }
+  .caps__more { display: inline-block; margin-top: 2rem; font-weight: 650; }
+  .caps__visual { position: sticky; top: 6rem; }
+  @media (max-width: 900px) {
+    .caps { grid-template-columns: 1fr; }
+    .caps__visual { position: static; }
+  }
+
+  .who { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .who li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 1rem 3rem; padding: 1.6rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .who p { color: var(--muted); font-size: 1.1rem; }
+  @media (max-width: 700px) { .who li { grid-template-columns: 1fr; gap: .4rem; } }
+</style>

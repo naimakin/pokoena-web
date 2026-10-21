@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found | POKO" description="This page does not exist.">
+  <section class="wrap msg">
+    <h1>This page doesn't exist</h1>
+    <p class="lede">The link may be out of date. If you were looking for the POKO app, sign in at app.pokoena.com.</p>
+    <div class="actions">
+      <a href="/" class="btn btn--primary">Go to the homepage</a>
+      <a href="https://app.pokoena.com" class="btn">Log in to POKO</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .msg { padding-block: clamp(4rem, 12vw, 8rem); }
+  .msg .lede { margin: 1.25rem 0 2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .actions .btn:not(.btn--primary) { border-color: var(--line); color: var(--navy); }
+</style>

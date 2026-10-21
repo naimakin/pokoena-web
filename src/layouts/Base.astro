@@ -1,0 +1,138 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/platform', label: 'Platform' },
+  { href: '/#how-it-works', label: 'How it works' },
+  { href: '/#who-its-for', label: "Who it's for" },
+];
+const appUrl = 'https://app.pokoena.com';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta name="theme-color" content="#1f1752" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="/" class="site-header__home" aria-label="POKO home"><Logo /></a>
+      <nav class="site-nav" aria-label="Main">
+        <input type="checkbox" id="nav-toggle" class="site-nav__toggle" aria-label="Open menu" />
+        <label for="nav-toggle" class="site-nav__burger" aria-hidden="true"><span></span></label>
+        <div class="site-nav__panel">
+          <ul>
+            {nav.map((item) => (
+              <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+          <div class="site-nav__actions">
+            <a href={appUrl} class="site-nav__login">Log in</a>
+            <a href="/request-demo" class="btn btn--primary">Request a demo</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main"><slot /></main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <div class="site-footer__brand">
+        <Logo tone="light" />
+        <p>Schedule update control for large construction projects, built on Primavera P6.</p>
+      </div>
+      <nav aria-label="Footer" class="site-footer__cols">
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/platform">Platform</a></li>
+            <li><a href="/#how-it-works">How it works</a></li>
+            <li><a href={appUrl}>Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <li><a href="/request-demo">Request a demo</a></li>
+            <li><a href="mailto:nakn@pokoena.com">nakn@pokoena.com</a></li>
+            <li><a href="https://www.linkedin.com/company/pokoena">LinkedIn</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap site-footer__legal">
+      <p>© {new Date().getFullYear()} POKO. Primavera P6 is a trademark of Oracle. POKO is not affiliated with Oracle.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .skip { position: absolute; left: -999px; top: 0; background: var(--navy); color: #fff; padding: .6rem 1rem; z-index: 100; }
+  .skip:focus { left: 1rem; top: 1rem; }
+
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
+  .site-header__inner { display: flex; align-items: center; justify-content: space-between; height: 4.25rem; }
+  .site-header__home { text-decoration: none; }
+
+  .site-nav__panel { display: flex; align-items: center; gap: 2rem; }
+  .site-nav ul { display: flex; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
+  .site-nav ul a, .site-nav__login { color: var(--text); text-decoration: none; font-weight: 550; font-size: .97rem; }
+  .site-nav ul a:hover, .site-nav__login:hover, .site-nav ul a[aria-current] { color: var(--violet); }
+  .site-nav__actions { display: flex; align-items: center; gap: 1.25rem; }
+  .site-nav__actions .btn { padding: .7rem 1.1rem; font-size: .95rem; }
+  .site-nav__toggle, .site-nav__burger { display: none; }
+
+  @media (max-width: 860px) {
+    .site-nav__burger { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; cursor: pointer; }
+    .site-nav__burger span, .site-nav__burger span::before, .site-nav__burger span::after {
+      display: block; width: 22px; height: 2px; background: var(--navy); position: relative; content: '';
+    }
+    .site-nav__burger span::before { position: absolute; top: -7px; }
+    .site-nav__burger span::after { position: absolute; top: 7px; }
+    .site-nav__toggle { display: block; position: absolute; opacity: 0; width: 2.75rem; height: 2.75rem; margin: 0; cursor: pointer; }
+    .site-nav { position: relative; }
+    .site-nav__panel {
+      display: none; position: fixed; inset: 4.25rem 0 auto 0; background: #fff;
+      flex-direction: column; align-items: stretch; gap: 1.5rem; padding: 1.5rem var(--gutter) 2rem;
+      border-bottom: 1px solid var(--line); box-shadow: 0 20px 30px -20px rgba(31,23,82,.25);
+    }
+    .site-nav__toggle:checked ~ .site-nav__panel { display: flex; }
+    .site-nav__toggle:focus-visible + .site-nav__burger { outline: 3px solid var(--flag); }
+    .site-nav ul { flex-direction: column; gap: 1rem; }
+    .site-nav ul a { font-size: 1.15rem; }
+    .site-nav__actions { flex-direction: column; align-items: stretch; }
+  }
+
+  .site-footer { background: var(--navy-deep); color: rgba(255,255,255,.75); padding-top: 4rem; font-size: .95rem; }
+  .site-footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 3rem; padding-bottom: 3rem; }
+  .site-footer__brand { max-width: 22rem; }
+  .site-footer__brand p { margin-top: 1rem; }
+  .site-footer__cols { display: flex; gap: 4rem; }
+  .site-footer h2 { color: #fff; font-size: 1rem; font-stretch: 100%; margin-bottom: .9rem; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+  .site-footer a { color: rgba(255,255,255,.75); text-decoration: none; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer__legal { border-top: 1px solid rgba(255,255,255,.12); padding-block: 1.5rem; font-size: .85rem; color: rgba(255,255,255,.55); }
+</style>

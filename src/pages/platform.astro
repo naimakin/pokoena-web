@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import SCurve from '../components/SCurve.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const queue = [
+  { who: 'MEP sub.', what: 'MEP rough-in', change: 'FS → SS +2w on Superstructure L1–L8', flag: true },
+  { who: 'Structural sub.', what: 'Raft foundation', change: 'Lag reduced from 5d to 1d', flag: true },
+  { who: 'Façade sub.', what: 'Façade installation', change: 'New successor added: Roof works', flag: false },
+];
+---
+<Base
+  title="Platform | POKO"
+  description="Update periods with scope-based access, change control for schedule logic, S-curve, EVM and Monte Carlo analysis, and AI-assisted follow-ups, all on top of Primavera P6."
+>
+  <section class="intro">
+    <div class="wrap">
+      <h1>Everything a monthly update needs, around the P6 schedule you already use.</h1>
+      <p class="lede">POKO handles the part of planning that happens between people: collecting progress, checking changes, and turning an update into decisions.</p>
+      <nav class="jump" aria-label="On this page">
+        <a href="#periods">Update periods</a>
+        <a href="#change-control">Change control</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#ai">AI assistant</a>
+        <a href="#access">Companies and access</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="mod" id="periods">
+    <div class="wrap mod__inner">
+      <div class="mod__copy">
+        <h2>Update periods</h2>
+        <p>Open a period, set the deadline and POKO handles the rest. Each responsible person gets an email with a link to their own scope. The dashboard shows who has submitted, who is late and how much time is left.</p>
+        <ul>
+          <li>Deadline countdown and automatic reminders</li>
+          <li>Submission status for every scope and subcontractor</li>
+          <li>Actual dates, percent complete and remaining duration per activity</li>
+        </ul>
+      </div>
+      <div class="panel" aria-hidden="true">
+        <div class="panel__head"><strong>Update period 7</strong><span>Closes Friday 17:00</span></div>
+        <table class="status">
+          <thead><tr><th>Scope</th><th>Activities</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Earthworks sub.</td><td>14</td><td><span class="pill pill--ok">Submitted</span></td></tr>
+            <tr><td>Structural sub.</td><td>38</td><td><span class="pill pill--ok">Submitted</span></td></tr>
+            <tr><td>MEP sub.</td><td>52</td><td><span class="pill pill--flag">Needs approval</span></td></tr>
+            <tr><td>Façade sub.</td><td>21</td><td><span class="pill pill--open">In progress</span></td></tr>
+            <tr><td>Landscape sub.</td><td>9</td><td><span class="pill pill--late">Not started</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod mod--paper" id="change-control">
+    <div class="wrap mod__inner mod__inner--flip">
+      <div class="mod__copy">
+        <h2>Change control</h2>
+        <p>Progress updates go straight through. Anything that changes the logic of the schedule does not. Links, lags, relationship types and new activities are held in a review queue until the planning admin approves or rejects them.</p>
+        <ul>
+          <li>Side-by-side view of the original and proposed logic</li>
+          <li>Approve or reject with a comment the subcontractor can see</li>
+          <li>Full audit trail of every change and decision</li>
+        </ul>
+      </div>
+      <div class="panel" aria-hidden="true">
+        <div class="panel__head"><strong>Review queue</strong><span>3 pending</span></div>
+        <ul class="queue">
+          {queue.map((q) => (
+            <li class={q.flag ? 'is-flag' : ''}>
+              <div><strong>{q.what}</strong><span>{q.who}</span></div>
+              <p>{q.change}</p>
+              <div class="queue__act"><span class="fake-btn">Reject</span><span class="fake-btn fake-btn--primary">Approve</span></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="analysis">
+    <div class="wrap mod__inner">
+      <div class="mod__copy">
+        <h2>Analysis at the close of every period</h2>
+        <p>When the period closes, POKO merges the approved updates and runs the analysis automatically. Owners and project directors see the current picture the same day, not two weeks later.</p>
+        <ul>
+          <li>S-curves for planned, actual and forecast progress</li>
+          <li>Earned value: SPI, CPI, schedule and cost variance</li>
+          <li>Monte Carlo simulation with P50 and P80 finish dates</li>
+          <li>The merged schedule exported back to Primavera P6</li>
+        </ul>
+      </div>
+      <SCurve />
+    </div>
+  </section>
+
+  <section class="mod mod--paper" id="ai">
+    <div class="wrap mod__inner mod__inner--flip">
+      <div class="mod__copy">
+        <h2>AI assistant</h2>
+        <p>Reading a large update takes hours. POKO's assistant summarises what moved, why it matters for the critical path and who should act on it. Every suggestion links back to the activities behind it, and nothing is changed without a person approving it.</p>
+      </div>
+      <div class="panel panel--ai" aria-hidden="true">
+        <div class="panel__head"><strong>Period 7 summary</strong><span>Generated after close</span></div>
+        <div class="ai">
+          <p>Forecast finish moved <b>11 working days later</b> than period 6. Most of the slip comes from the raft foundation, which finished a week late and pushed the superstructure.</p>
+          <p>Two logic changes were rejected because they would have hidden this delay.</p>
+          <p class="ai__h">Suggested follow-ups</p>
+          <ul>
+            <li>Ask the structural subcontractor for a recovery plan for L1–L8.</li>
+            <li>Review MEP resourcing before the rough-in start date.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="access">
+    <div class="wrap mod__inner">
+      <div class="mod__copy">
+        <h2>Companies and access</h2>
+        <p>POKO is built for many companies working on one project. Each company has its own space, its own admins and its own users. Subcontractors are invited to a specific project and a specific part of the schedule, and see nothing else.</p>
+      </div>
+      <ol class="tree" aria-label="Access levels">
+        <li><strong>Company admin</strong><span>Manages projects, users and update periods</span></li>
+        <li><strong>Company employee</strong><span>Works on the projects they are assigned to</span></li>
+        <li><strong>Subcontractor</strong><span>Updates one scope on one project</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .intro { padding-block: clamp(3.5rem, 8vw, 6rem) 2.5rem; border-bottom: 1px solid var(--line); }
+  .intro h1 { max-width: 52rem; font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
+  .intro .lede { margin-top: 1.25rem; }
+  .jump { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; margin-top: 2.5rem; }
+  .jump a { font-weight: 600; text-decoration: none; }
+  .jump a:hover { text-decoration: underline; }
+
+  .mod { padding-block: clamp(3.5rem, 8vw, 6rem); scroll-margin-top: 4rem; }
+  .mod--paper { background: var(--paper); }
+  .mod__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .mod__inner--flip > :first-child { order: 2; }
+  .mod__copy p { margin-top: 1rem; color: var(--muted); font-size: 1.1rem; max-width: 34rem; }
+  .mod__copy ul { margin: 1.5rem 0 0; padding: 0; list-style: none; display: grid; gap: .6rem; }
+  .mod__copy li { padding-left: 1.5rem; position: relative; }
+  .mod__copy li::before { content: ''; position: absolute; left: 0; top: .65rem; width: .7rem; height: 2px; background: var(--violet); }
+  @media (max-width: 900px) {
+    .mod__inner { grid-template-columns: 1fr; }
+    .mod__inner--flip > :first-child { order: 0; }
+  }
+
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; font-size: .92rem; }
+  .panel__head { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 1.25rem; background: var(--navy); color: rgba(255,255,255,.7); }
+  .panel__head strong { color: #fff; font-weight: 600; }
+
+  .status { width: 100%; border-collapse: collapse; }
+  .status th, .status td { text-align: left; padding: .75rem 1.25rem; border-bottom: 1px solid #eef0f6; }
+  .status th { font-size: .78rem; color: var(--muted); font-weight: 550; }
+  .status td:first-child { color: var(--navy); font-weight: 560; }
+  .status tr:last-child td { border-bottom: 0; }
+  .pill { display: inline-block; padding: .2rem .6rem; border-radius: 999px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+  .pill--ok { background: #e8e5f8; color: var(--violet); }
+  .pill--flag { background: #fdefcf; color: #6b4d0a; }
+  .pill--open { background: var(--paper); color: var(--muted); }
+  .pill--late { background: #fbe4e4; color: #8a1f1f; }
+
+  .queue { list-style: none; margin: 0; padding: 0; }
+  .queue li { padding: 1rem 1.25rem; border-bottom: 1px solid #eef0f6; border-left: 4px solid transparent; }
+  .queue li.is-flag { border-left-color: var(--flag); }
+  .queue li div:first-child { display: flex; justify-content: space-between; gap: 1rem; }
+  .queue strong { color: var(--navy); }
+  .queue li > div:first-child span { color: var(--muted); font-size: .85rem; }
+  .queue p { margin-top: .3rem; }
+  .queue__act { display: flex; gap: .5rem; justify-content: flex-end; margin-top: .6rem; }
+  .fake-btn { padding: .35rem .8rem; border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: .8rem; font-weight: 600; color: var(--text); }
+  .fake-btn--primary { background: var(--violet); border-color: var(--violet); color: #fff; }
+
+  .ai { padding: 1.25rem; display: grid; gap: .8rem; line-height: 1.55; }
+  .ai b { color: var(--navy); }
+  .ai__h { font-weight: 650; color: var(--navy); margin-top: .3rem; }
+  .ai ul { margin: 0; padding-left: 1.2rem; display: grid; gap: .35rem; }
+
+  .tree { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+  .tree li { display: grid; gap: .2rem; padding: 1.1rem 1.25rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .tree li:nth-child(2) { margin-left: 2rem; }
+  .tree li:nth-child(3) { margin-left: 4rem; border-color: var(--violet); }
+  .tree strong { color: var(--navy); }
+  .tree span { color: var(--muted); font-size: .95rem; }
+  @media (max-width: 520px) {
+    .tree li:nth-child(2) { margin-left: 1rem; }
+    .tree li:nth-child(3) { margin-left: 2rem; }
+    .status th:nth-child(2), .status td:nth-child(2) { display: none; }
+  }
+</style>

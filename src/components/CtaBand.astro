@@ -1,0 +1,23 @@
+---
+interface Props { title?: string; text?: string; }
+const {
+  title = 'See POKO running on your own schedule',
+  text = "Send us a recent P6 schedule and we'll walk you through one full update period with your activities, your scopes and your subcontractors.",
+} = Astro.props;
+---
+<section class="cta">
+  <div class="wrap cta__inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <a href="/request-demo" class="btn btn--light">Request a demo</a>
+  </div>
+</section>
+
+<style>
+  .cta { background: var(--violet); color: rgba(255,255,255,.85); padding-block: clamp(3.5rem, 7vw, 5rem); }
+  .cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .cta h2 { color: #fff; max-width: 32rem; }
+  .cta p { margin-top: .9rem; max-width: 38rem; font-size: 1.1rem; }
+</style>

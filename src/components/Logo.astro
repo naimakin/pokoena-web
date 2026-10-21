@@ -1,0 +1,32 @@
+---
+interface Props { tone?: 'light' | 'dark'; }
+const { tone = 'dark' } = Astro.props;
+---
+<span class={`logo logo--${tone}`}>
+  <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true">
+    <rect width="64" height="64" rx="14" class="logo__tile" />
+    <path d="M20 22h10v9h9v9" fill="none" class="logo__path" stroke-width="4" stroke-linejoin="round" />
+    <circle cx="20" cy="22" r="4.5" class="logo__node" />
+    <circle cx="39" cy="42" r="6.5" class="logo__node" />
+  </svg>
+  <span class="logo__word">POKO</span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .logo__mark { width: 2rem; height: 2rem; flex: none; }
+  .logo__word {
+    font-weight: 750;
+    font-stretch: 118%;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+  }
+  .logo--dark .logo__tile { fill: var(--navy); }
+  .logo--dark .logo__path { stroke: #fff; }
+  .logo--dark .logo__node { fill: #fff; }
+  .logo--dark .logo__word { color: var(--navy); }
+  .logo--light .logo__tile { fill: #fff; }
+  .logo--light .logo__path { stroke: var(--violet); }
+  .logo--light .logo__node { fill: var(--violet); }
+  .logo--light .logo__word { color: #fff; }
+</style>
