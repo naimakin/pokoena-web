@@ -7,7 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 const problems = [
   {
     title: 'Too many hands in one file',
-    text: 'On a project with dozens of subcontractors, updates arrive by email and spreadsheet and get keyed into the master schedule by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
+    text: 'On a project with dozens of subcontractors, engineers and consultants, updates arrive by email and spreadsheet and get keyed into the master schedule by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
   },
   {
     title: 'Changes hide in the logic',
@@ -21,10 +21,10 @@ const problems = [
 
 const steps = [
   { title: 'Open the update period', text: 'The planning admin imports the current schedule and sets a deadline.' },
-  { title: 'Invite by scope', text: 'Each subcontractor and engineer gets an email with access to their own activities only.' },
+  { title: 'Invite stakeholders', text: 'Subcontractors, site engineers and consultants each get access to their own scope only.' },
   { title: 'Update progress', text: 'Actual dates, percent complete and remaining durations, entered where the work is done.' },
   { title: 'Review logic changes', text: 'Any change to a link, lag or relationship is flagged and waits for admin approval.' },
-  { title: 'Close and analyse', text: 'S-curve, earned value and Monte Carlo forecasts run as soon as the period closes.' },
+  { title: 'Close and analyse', text: 'Analysis, risk forecasts, reports and dashboards are ready as soon as the period closes.' },
   { title: 'Merge and export', text: 'All approved updates are merged into one schedule, ready to export back to your planning tool.' },
 ];
 
@@ -32,20 +32,22 @@ const capabilities = [
   { title: 'Scope-based access', text: 'Every user sees and edits only the activities they are responsible for, on the projects they are invited to.' },
   { title: 'Change control with an audit trail', text: 'Who changed what, when, and who approved it. Logic edits never reach the schedule unreviewed.' },
   { title: 'S-curve and earned value', text: 'Planned versus actual progress, SPI and CPI, recalculated for every update period.' },
-  { title: 'Monte Carlo risk forecast', text: 'P50 and P80 finish dates based on the current schedule, so you can see how much float is left.' },
+  { title: 'Risk analysis', text: 'Monte Carlo simulation gives P50 and P80 finish dates and shows which activities drive the risk.' },
+  { title: 'Reports and dashboards', text: 'Progress reports, look-aheads and project dashboards generated from every update, ready to download and share.' },
   { title: 'AI-assisted actions', text: 'Plain-language summaries of what changed and suggested follow-ups for late or slipping scopes.' },
 ];
 
 const audiences = [
-  { title: 'Owners and employers', text: 'A schedule you can trust each month, with every change explained and approved.' },
+  { title: 'Owners and employers', text: 'A schedule you can trust each month, with reports and dashboards that explain every change.' },
   { title: 'Main contractors', text: 'One update cycle for all subcontractors, without retyping their input into the schedule.' },
-  { title: 'Project management consultants', text: 'Independent visibility of progress, logic changes and forecast finish dates.' },
+  { title: 'Project management consultants', text: 'Independent visibility of progress, logic changes, risk and forecast finish dates.' },
+  { title: 'Planning and site engineers', text: 'Progress entered once, where the work happens, instead of passed along by email.' },
   { title: 'Subcontractors', text: 'A simple screen for their own scope instead of spreadsheets and email chains.' },
 ];
 ---
 <Base
   title="POKO | Project Intelligence & Execution"
-  description="POKO is a project intelligence and execution platform for large construction projects. Subcontractors update their own scope, logic changes wait for approval, and S-curve, EVM and Monte Carlo analysis is ready when the period closes."
+  description="POKO is a project planning and management platform for construction. Every stakeholder updates their own part of the schedule, and analysis, reports, dashboards and risk forecasts are ready when the update period closes."
 >
   <section class="hero">
     <div class="wrap hero__inner">
@@ -53,8 +55,9 @@ const audiences = [
         <p class="hero__category">Project Intelligence &amp; Execution</p>
         <h1>Know exactly what changed in your schedule, and why.</h1>
         <p class="hero__lede">
-          POKO is a project intelligence and execution platform for large construction projects. Each subcontractor
-          updates only their own scope, logic changes wait for approval, and the analysis is ready the moment the period closes.
+          POKO is a project planning and management platform for construction. Every stakeholder updates their own part
+          of the schedule, logic changes wait for approval, and analysis, reports, dashboards and risk forecasts are ready
+          the moment the update period closes.
         </p>
         <div class="hero__actions">
           <a href="/request-demo" class="btn btn--light">Request a demo</a>
@@ -71,7 +74,7 @@ const audiences = [
     <div class="wrap truth__inner">
       <div>
         <p class="truth__claim">POKO doesn't replace your scheduling software. It controls how your schedule gets updated.</p>
-        <p class="truth__note">Works with Primavera P6 schedules today (.xer and .xml). Microsoft Project and Asta Powerproject import are on the way.</p>
+        <p class="truth__note">Starts with Primavera P6 schedules (.xer and .xml). Microsoft Project and Asta Powerproject import are on the way.</p>
       </div>
       <ol class="truth__flow" aria-label="How POKO works with your scheduling software">
         <li><strong>Your schedule</strong><span>stays the single source of truth</span></li>
