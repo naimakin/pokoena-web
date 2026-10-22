@@ -7,7 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 const problems = [
   {
     title: 'Too many hands in one file',
-    text: 'On a project with dozens of subcontractors, updates arrive by email and spreadsheet and get keyed into P6 by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
+    text: 'On a project with dozens of subcontractors, updates arrive by email and spreadsheet and get keyed into the master schedule by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
   },
   {
     title: 'Changes hide in the logic',
@@ -20,12 +20,12 @@ const problems = [
 ];
 
 const steps = [
-  { title: 'Open the update period', text: 'The planning admin loads the current P6 schedule and sets a deadline.' },
+  { title: 'Open the update period', text: 'The planning admin imports the current schedule and sets a deadline.' },
   { title: 'Invite by scope', text: 'Each subcontractor and engineer gets an email with access to their own activities only.' },
   { title: 'Update progress', text: 'Actual dates, percent complete and remaining durations, entered where the work is done.' },
   { title: 'Review logic changes', text: 'Any change to a link, lag or relationship is flagged and waits for admin approval.' },
   { title: 'Close and analyse', text: 'S-curve, earned value and Monte Carlo forecasts run as soon as the period closes.' },
-  { title: 'Merge back to P6', text: 'All approved updates are merged into one P6 schedule, ready to download and share.' },
+  { title: 'Merge and export', text: 'All approved updates are merged into one schedule, ready to export back to your planning tool.' },
 ];
 
 const capabilities = [
@@ -38,22 +38,23 @@ const capabilities = [
 
 const audiences = [
   { title: 'Owners and employers', text: 'A schedule you can trust each month, with every change explained and approved.' },
-  { title: 'Main contractors', text: 'One update cycle for all subcontractors, without retyping their input into P6.' },
+  { title: 'Main contractors', text: 'One update cycle for all subcontractors, without retyping their input into the schedule.' },
   { title: 'Project management consultants', text: 'Independent visibility of progress, logic changes and forecast finish dates.' },
   { title: 'Subcontractors', text: 'A simple screen for their own scope instead of spreadsheets and email chains.' },
 ];
 ---
 <Base
-  title="POKO | Schedule update control on Primavera P6"
-  description="POKO runs every schedule update on top of Primavera P6. Subcontractors update their own scope, logic changes wait for approval, and S-curve, EVM and Monte Carlo analysis is ready when the period closes."
+  title="POKO | Project Intelligence & Execution"
+  description="POKO is a project intelligence and execution platform for large construction projects. Subcontractors update their own scope, logic changes wait for approval, and S-curve, EVM and Monte Carlo analysis is ready when the period closes."
 >
   <section class="hero">
     <div class="wrap hero__inner">
       <div class="hero__copy">
+        <p class="hero__category">Project Intelligence &amp; Execution</p>
         <h1>Know exactly what changed in your schedule, and why.</h1>
         <p class="hero__lede">
-          POKO runs every schedule update on top of Primavera P6. Each subcontractor updates only their own scope,
-          logic changes wait for approval, and the analysis is ready the moment the period closes.
+          POKO is a project intelligence and execution platform for large construction projects. Each subcontractor
+          updates only their own scope, logic changes wait for approval, and the analysis is ready the moment the period closes.
         </p>
         <div class="hero__actions">
           <a href="/request-demo" class="btn btn--light">Request a demo</a>
@@ -68,11 +69,14 @@ const audiences = [
 
   <section class="truth">
     <div class="wrap truth__inner">
-      <p class="truth__claim">POKO doesn't replace Primavera P6. It controls how P6 gets updated.</p>
-      <ol class="truth__flow" aria-label="How POKO works with P6">
-        <li><strong>Your P6 schedule</strong><span>stays the single source of truth</span></li>
+      <div>
+        <p class="truth__claim">POKO doesn't replace your scheduling software. It controls how your schedule gets updated.</p>
+        <p class="truth__note">Works with Primavera P6 schedules today (.xer and .xml). Microsoft Project and Asta Powerproject import are on the way.</p>
+      </div>
+      <ol class="truth__flow" aria-label="How POKO works with your scheduling software">
+        <li><strong>Your schedule</strong><span>stays the single source of truth</span></li>
         <li><strong>Scoped updates in POKO</strong><span>reviewed, approved, analysed</span></li>
-        <li><strong>One merged P6 schedule</strong><span>ready to share</span></li>
+        <li><strong>One merged schedule</strong><span>exported back, ready to share</span></li>
       </ol>
     </div>
   </section>
@@ -160,6 +164,7 @@ const audiences = [
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(2rem, 5vw, 4rem);
     align-items: center; padding-block: clamp(3.5rem, 8vw, 6.5rem);
   }
+  .hero__category { color: var(--violet-soft); font-weight: 600; font-size: 1.05rem; font-stretch: 110%; margin-bottom: 1rem; }
   .hero h1 { color: #fff; font-size: clamp(2.4rem, 4.6vw, 3.75rem); }
   .hero__lede { margin-top: 1.5rem; font-size: 1.2rem; max-width: 34rem; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2.25rem; }
@@ -171,6 +176,7 @@ const audiences = [
   .truth { border-bottom: 1px solid var(--line); }
   .truth__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 2rem 4rem; align-items: center; padding-block: 3rem; }
   .truth__claim { font-size: clamp(1.3rem, 2.2vw, 1.6rem); font-weight: 600; font-stretch: 106%; color: var(--navy); line-height: 1.3; }
+  .truth__note { margin-top: .75rem; color: var(--muted); font-size: .95rem; }
   .truth__flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
   .truth__flow li { position: relative; padding: 1rem 1.5rem 1rem 0; display: grid; gap: .2rem; }
   .truth__flow li:not(:last-child)::after {

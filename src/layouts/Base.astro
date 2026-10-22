@@ -60,7 +60,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <div class="wrap site-footer__inner">
       <div class="site-footer__brand">
         <Logo tone="light" />
-        <p>Schedule update control for large construction projects, built on Primavera P6.</p>
+        <p>Project Intelligence &amp; Execution for large construction projects.</p>
       </div>
       <nav aria-label="Footer" class="site-footer__cols">
         <div>
@@ -82,7 +82,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       </nav>
     </div>
     <div class="wrap site-footer__legal">
-      <p>© {new Date().getFullYear()} POKO. Primavera P6 is a trademark of Oracle. POKO is not affiliated with Oracle.</p>
+      <p>© {new Date().getFullYear()} POKO. All rights reserved.</p>
+      <p>Oracle and Primavera are registered trademarks of Oracle and/or its affiliates. Microsoft Project is a trademark of Microsoft Corporation. Asta Powerproject is a trademark of Elecosoft. Other names may be trademarks of their respective owners. POKO is not affiliated with or endorsed by any of these companies.</p>
     </div>
   </footer>
 </body>
@@ -134,5 +135,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
   .site-footer a { color: rgba(255,255,255,.75); text-decoration: none; }
   .site-footer a:hover { color: #fff; }
+  .site-footer__legal p + p { margin-top: .5rem; max-width: 60rem; }
   .site-footer__legal { border-top: 1px solid rgba(255,255,255,.12); padding-block: 1.5rem; font-size: .85rem; color: rgba(255,255,255,.55); }
 </style>
