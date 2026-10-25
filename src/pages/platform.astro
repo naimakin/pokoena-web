@@ -3,27 +3,34 @@ import Base from '../layouts/Base.astro';
 import SCurve from '../components/SCurve.astro';
 import CtaBand from '../components/CtaBand.astro';
 
-const queue = [
-  { who: 'MEP sub.', what: 'MEP rough-in', change: 'FS → SS +2w on Superstructure L1–L8', flag: true },
-  { who: 'Structural sub.', what: 'Raft foundation', change: 'Lag reduced from 5d to 1d', flag: true },
-  { who: 'Façade sub.', what: 'Façade installation', change: 'New successor added: Roof works', flag: false },
+const proposals = [
+  { who: 'Structural sub.', what: 'Superstructure L1–L8', change: '62% → 70% complete, remaining 18d → 15d' },
+  { who: 'MEP sub.', what: 'MEP rough-in', change: 'Actual start 14 Oct' },
+  { who: 'Façade sub.', what: 'Façade installation', change: '45% → 60% complete, note added' },
+];
+
+const logicChanges = [
+  { what: 'MEP rough-in', change: 'Predecessor link FS → SS +2w' },
+  { what: 'Raft foundation', change: 'Lag reduced from 5d to 1d' },
+  { what: 'Façade installation', change: 'New successor: Roof works' },
 ];
 ---
 <Base
   title="Platform | POKO"
-  description="Stakeholder schedule updates with scope-based access, change control, S-curve and EVM analysis, Monte Carlo risk analysis, reports and dashboards, and AI-assisted follow-ups."
+  description="Stakeholder progress entry with scope-based access, progress approval and audit trail, logic change detection between updates, S-curve and EVM, one-click Monte Carlo risk analysis, reports and dashboards, and an optional AI assistant."
 >
   <section class="intro">
     <div class="wrap">
       <h1>Everything a monthly update needs, around the schedule you already have.</h1>
-      <p class="lede">POKO handles the part of planning that happens between people: collecting progress from every stakeholder, checking changes, and turning each update into analysis, reports and decisions.</p>
+      <p class="lede">POKO handles the part of planning that happens between people: collecting progress from every stakeholder, approving it, catching logic changes, and turning each update into analysis, reports and decisions.</p>
       <nav class="jump" aria-label="On this page">
         <a href="#periods">Update periods</a>
-        <a href="#change-control">Change control</a>
+        <a href="#approval">Progress approval</a>
+        <a href="#logic">Logic changes</a>
         <a href="#analysis">Analysis and risk</a>
         <a href="#reports">Reports and dashboards</a>
         <a href="#ai">AI assistant</a>
-        <a href="#access">Companies and access</a>
+        <a href="#access">Roles and access</a>
       </nav>
     </div>
   </section>
@@ -32,11 +39,11 @@ const queue = [
     <div class="wrap mod__inner">
       <div class="mod__copy">
         <h2>Update periods</h2>
-        <p>Open a period, set the deadline and POKO handles the rest. Each stakeholder, from subcontractors to site engineers and consultants, gets an email with a link to their own scope. The dashboard shows who has submitted, who is late and how much time is left.</p>
+        <p>Open a period, set the deadline and POKO handles the rest. Each stakeholder gets an email with a link to their own scope. Anyone who hasn't entered progress gets a reminder, and approvers are notified as soon as a scope is submitted.</p>
         <ul>
           <li>Deadline countdown and automatic reminders</li>
-          <li>Submission status for every scope and subcontractor</li>
-          <li>Actual dates, percent complete and remaining duration per activity</li>
+          <li>Submission and approval status for every scope</li>
+          <li>Actual start, actual finish, percent complete, remaining duration and notes per activity</li>
         </ul>
       </div>
       <div class="panel" aria-hidden="true">
@@ -44,8 +51,8 @@ const queue = [
         <table class="status">
           <thead><tr><th>Scope</th><th>Activities</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>Earthworks sub.</td><td>14</td><td><span class="pill pill--ok">Submitted</span></td></tr>
-            <tr><td>Structural sub.</td><td>38</td><td><span class="pill pill--ok">Submitted</span></td></tr>
+            <tr><td>Earthworks sub.</td><td>14</td><td><span class="pill pill--ok">Approved</span></td></tr>
+            <tr><td>Structural sub.</td><td>38</td><td><span class="pill pill--flag">Needs approval</span></td></tr>
             <tr><td>MEP sub.</td><td>52</td><td><span class="pill pill--flag">Needs approval</span></td></tr>
             <tr><td>Façade sub.</td><td>21</td><td><span class="pill pill--open">In progress</span></td></tr>
             <tr><td>Landscape sub.</td><td>9</td><td><span class="pill pill--late">Not started</span></td></tr>
@@ -55,22 +62,22 @@ const queue = [
     </div>
   </section>
 
-  <section class="mod mod--paper" id="change-control">
+  <section class="mod mod--paper" id="approval">
     <div class="wrap mod__inner mod__inner--flip">
       <div class="mod__copy">
-        <h2>Change control</h2>
-        <p>Progress updates go straight through. Anything that changes the logic of the schedule does not. Links, lags, relationship types and new activities are held in a review queue until the planning admin approves or rejects them.</p>
+        <h2>Progress approval</h2>
+        <p>Subcontractor progress doesn't go straight into the schedule. Each entry is a proposal that a company admin or project manager approves or rejects from their own queue. Only approved progress reaches the schedule and the analysis.</p>
         <ul>
-          <li>Side-by-side view of the original and proposed logic</li>
-          <li>Approve or reject with a comment the subcontractor can see</li>
-          <li>Full audit trail of every change and decision</li>
+          <li>Approve or reject each entry, with the previous and proposed value side by side</li>
+          <li>Every field change recorded with who, when, old value and new value</li>
+          <li>Who entered, approved or rejected each proposal, and when</li>
         </ul>
       </div>
       <div class="panel" aria-hidden="true">
-        <div class="panel__head"><strong>Review queue</strong><span>3 pending</span></div>
+        <div class="panel__head"><strong>Waiting for approval</strong><span>3 entries</span></div>
         <ul class="queue">
-          {queue.map((q) => (
-            <li class={q.flag ? 'is-flag' : ''}>
+          {proposals.map((q) => (
+            <li>
               <div><strong>{q.what}</strong><span>{q.who}</span></div>
               <p>{q.change}</p>
               <div class="queue__act"><span class="fake-btn">Reject</span><span class="fake-btn fake-btn--primary">Approve</span></div>
@@ -81,63 +88,87 @@ const queue = [
     </div>
   </section>
 
-  <section class="mod" id="analysis">
+  <section class="mod" id="logic">
     <div class="wrap mod__inner">
       <div class="mod__copy">
-        <h2>Analysis and risk at the close of every period</h2>
-        <p>When the period closes, POKO merges the approved updates and runs the analysis automatically. Owners and project directors see the current picture the same day, not two weeks later.</p>
+        <h2>Logic changes, caught in every update</h2>
+        <p>Schedule logic stays with your planning team. Stakeholders can't change links, lags or relationships in POKO; logic only comes in with the schedule imported from P6. When a new update is imported, POKO compares it with the previous one and lists every logic change, so a shortened lag can't quietly absorb a delay.</p>
         <ul>
-          <li>S-curves for planned, actual and forecast progress</li>
+          <li>Link, lag and relationship type changes between two updates, FS to SS included</li>
+          <li>Each change shown with the update it first appeared in</li>
+        </ul>
+      </div>
+      <div class="panel" aria-hidden="true">
+        <div class="panel__head"><strong>Update comparison</strong><span>Update 6 → 7</span></div>
+        <ul class="queue">
+          {logicChanges.map((q) => (
+            <li class="is-flag">
+              <div><strong>{q.what}</strong></div>
+              <p>{q.change}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod mod--paper" id="analysis">
+    <div class="wrap mod__inner mod__inner--flip">
+      <div class="mod__copy">
+        <h2>Analysis and risk</h2>
+        <p>S-curve and earned value update as soon as progress is approved, so owners and project directors see the current picture the same day, not two weeks later. Schedule risk analysis runs in one click.</p>
+        <ul>
+          <li>S-curves for planned and actual progress</li>
           <li>Earned value: SPI, CPI, schedule and cost variance</li>
-          <li>Monte Carlo risk analysis with P50 and P80 finish dates</li>
-          <li>The activities that drive the risk on the critical path</li>
-          <li>The merged schedule exported back to your planning tool</li>
+          <li>Monte Carlo schedule risk analysis with P50 and P80 finish dates, in one click</li>
+          <li>Approved progress exported back to P6, where your planning team reschedules</li>
         </ul>
       </div>
       <SCurve />
     </div>
   </section>
 
-  <section class="mod mod--paper" id="reports">
-    <div class="wrap mod__inner mod__inner--flip">
+  <section class="mod" id="reports">
+    <div class="wrap mod__inner">
       <div class="mod__copy">
         <h2>Reports and dashboards</h2>
-        <p>Every closed period produces the reports your project needs, from the same approved data. Management and owners get a dashboard they can open any time, instead of waiting for a slide deck.</p>
+        <p>Reports and dashboards are built from the same approved data. Management and owners get a dashboard they can open any time, instead of waiting for a slide deck.</p>
         <ul>
-          <li>Project and portfolio dashboards with progress, SPI, CPI and forecast finish</li>
-          <li>Monthly progress reports and three-week look-aheads</li>
-          <li>Delay and change logs showing who changed what and why</li>
+          <li>Project and portfolio dashboards with progress, SPI and CPI</li>
+          <li>Monthly progress reports</li>
+          <li>Logic changes between updates and the progress audit trail</li>
           <li>Download and share with owners, consultants and management</li>
         </ul>
       </div>
       <div class="panel" aria-hidden="true">
-        <div class="panel__head"><strong>Project dashboard</strong><span>After period 7</span></div>
+        <div class="panel__head"><strong>Project dashboard</strong><span>Update 7</span></div>
         <div class="dash">
           <div class="dash__kpi"><span>Progress</span><strong>46%</strong><em>Plan 52%</em></div>
-          <div class="dash__kpi"><span>SPI</span><strong>0.88</strong><em>Period 6: 0.91</em></div>
+          <div class="dash__kpi"><span>SPI</span><strong>0.88</strong><em>Update 6: 0.91</em></div>
           <div class="dash__kpi"><span>CPI</span><strong>1.02</strong><em>On budget</em></div>
-          <div class="dash__kpi is-flag"><span>Forecast finish</span><strong>+11 days</strong><em>P80: +19 days</em></div>
+          <div class="dash__kpi is-flag"><span>Risk analysis</span><strong>P80 +19 days</strong><em>P50 +11 days</em></div>
         </div>
         <ul class="reports">
-          <li><span>Monthly progress report, period 7</span><span class="fake-btn">Download</span></li>
-          <li><span>Three-week look-ahead</span><span class="fake-btn">Download</span></li>
-          <li><span>Delay and change log</span><span class="fake-btn">Download</span></li>
+          <li><span>Monthly progress report, update 7</span><span class="fake-btn">Download</span></li>
+          <li><span>Logic changes, update 6 → 7</span><span class="fake-btn">Download</span></li>
+          <li><span>Progress audit trail</span><span class="fake-btn">Download</span></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="mod" id="ai">
-    <div class="wrap mod__inner">
+  <section class="mod mod--paper" id="ai">
+    <div class="wrap mod__inner mod__inner--flip">
       <div class="mod__copy">
         <h2>AI assistant</h2>
-        <p>Reading a large update takes hours. POKO's assistant summarises what moved, why it matters for the critical path and who should act on it. Every suggestion links back to the activities behind it, and nothing is changed without a person approving it.</p>
+        <p>Reading a large update takes hours. POKO's assistant summarises what moved, why it matters and who should act on it. Every suggestion links back to the activities behind it, and it never changes your schedule.</p>
+        <p>The assistant is optional and off by default. Your company admin decides whether project data can be sent to an AI provider.</p>
       </div>
       <div class="panel panel--ai" aria-hidden="true">
-        <div class="panel__head"><strong>Period 7 summary</strong><span>Generated after close</span></div>
+        <div class="panel__head"><strong>Update 7 summary</strong><span>AI-generated</span></div>
         <div class="ai">
-          <p>Forecast finish moved <b>11 working days later</b> than period 6. Most of the slip comes from the raft foundation, which finished a week late and pushed the superstructure.</p>
-          <p>Two logic changes were rejected because they would have hidden this delay.</p>
+          <p>The raft foundation finished a week late and pushed the superstructure. SPI dropped from <b>0.91 to 0.88</b>.</p>
+          <p>Two logic changes in this update shortened lags on the structural work. Check them in the update comparison.</p>
           <p class="ai__h">Suggested follow-ups</p>
           <ul>
             <li>Ask the structural subcontractor for a recovery plan for L1–L8.</li>
@@ -148,17 +179,18 @@ const queue = [
     </div>
   </section>
 
-  <section class="mod mod--paper" id="access">
-    <div class="wrap mod__inner mod__inner--flip">
+  <section class="mod" id="access">
+    <div class="wrap mod__inner">
       <div class="mod__copy">
-        <h2>Companies and access</h2>
-        <p>POKO is built for many companies working on one project. Each company has its own space, its own admins and its own users. Subcontractors and other stakeholders are invited to a specific project and a specific part of the schedule, and see nothing else.</p>
+        <h2>Roles and access</h2>
+        <p>POKO is built for many companies working on one project. Each company has its own space, its own admins and its own users. Subcontractors are invited to a specific project and a specific part of the schedule, and see nothing else.</p>
       </div>
-      <ol class="tree" aria-label="Access levels">
-        <li><strong>Company admin</strong><span>Manages projects, users and update periods</span></li>
-        <li><strong>Company employee</strong><span>Works on the projects they are assigned to</span></li>
-        <li><strong>Subcontractor or stakeholder</strong><span>Updates one scope on one project</span></li>
-      </ol>
+      <ul class="tree" aria-label="Roles">
+        <li><strong>Company admin</strong><span>Manages projects, users and update periods, and approves progress</span></li>
+        <li><strong>Project manager and planner</strong><span>Import schedules from P6. Project managers also approve progress</span></li>
+        <li><strong>Delivery team</strong><span>Enters progress on any activity in the project</span></li>
+        <li><strong>Subcontractor</strong><span>Sees and updates only their own scope, set by WBS or activity code</span></li>
+      </ul>
     </div>
   </section>
 
@@ -222,6 +254,7 @@ const queue = [
   .reports li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .7rem 1.25rem; }
   .reports li + li { border-top: 1px solid #eef0f6; }
   .reports li > span:first-child { color: var(--navy); font-weight: 560; }
+  .mod__copy p + p { margin-top: .75rem; }
   .ai { padding: 1.25rem; display: grid; gap: .8rem; line-height: 1.55; }
   .ai b { color: var(--navy); }
   .ai__h { font-weight: 650; color: var(--navy); margin-top: .3rem; }
@@ -229,13 +262,10 @@ const queue = [
 
   .tree { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
   .tree li { display: grid; gap: .2rem; padding: 1.1rem 1.25rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); }
-  .tree li:nth-child(2) { margin-left: 2rem; }
-  .tree li:nth-child(3) { margin-left: 4rem; border-color: var(--violet); }
+  .tree li:last-child { border-color: var(--violet); }
   .tree strong { color: var(--navy); }
   .tree span { color: var(--muted); font-size: .95rem; }
   @media (max-width: 520px) {
-    .tree li:nth-child(2) { margin-left: 1rem; }
-    .tree li:nth-child(3) { margin-left: 2rem; }
     .status th:nth-child(2), .status td:nth-child(2) { display: none; }
   }
 </style>

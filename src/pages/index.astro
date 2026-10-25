@@ -7,38 +7,40 @@ import CtaBand from '../components/CtaBand.astro';
 const problems = [
   {
     title: 'Too many hands in one file',
-    text: 'On a project with dozens of subcontractors, engineers and consultants, updates arrive by email and spreadsheet and get keyed into the master schedule by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
+    text: 'On a project with dozens of subcontractors, engineers and consultants, progress arrives by email and spreadsheet and gets retyped into the schedule by one overloaded planner. Errors creep in and nobody can tell whose input is whose.',
   },
   {
     title: 'Changes hide in the logic',
-    text: 'A shortened lag or a relationship switched from finish-to-start to start-to-start can absorb weeks of delay without a single date looking wrong. These edits are easy to make and hard to spot.',
+    text: 'A shortened lag or a relationship switched from finish-to-start to start-to-start can absorb weeks of delay without a single date looking wrong. POKO compares every update with the previous one and lists each logic change, so none of them go unnoticed.',
   },
   {
     title: 'Analysis comes too late',
-    text: "By the time the update is merged, checked and analysed, the period is half over. Owners and main contractors end up reacting to last month's picture.",
+    text: "By the time progress is collected, checked and analysed, the period is half over. Owners and main contractors end up reacting to last month's picture.",
   },
 ];
 
 const steps = [
-  { title: 'Open the update period', text: 'The planning admin imports the current schedule and sets a deadline.' },
-  { title: 'Invite stakeholders', text: 'Subcontractors, site engineers and consultants each get access to their own scope only.' },
-  { title: 'Update progress', text: 'Actual dates, percent complete and remaining durations, entered where the work is done.' },
-  { title: 'Review logic changes', text: 'Any change to a link, lag or relationship is flagged and waits for admin approval.' },
-  { title: 'Close and analyse', text: 'Analysis, risk forecasts, reports and dashboards are ready as soon as the period closes.' },
-  { title: 'Merge and export', text: 'All approved updates are merged into one schedule, ready to export back to your planning tool.' },
+  { title: 'Open the update period', text: 'A planner imports the latest schedule from P6 and sets a deadline.' },
+  { title: 'Invite stakeholders', text: 'Everyone gets an email. Subcontractors see only their own scope, set by WBS or activity code.' },
+  { title: 'Enter progress', text: 'Actual start and finish, percent complete, remaining duration and notes, entered where the work is done.' },
+  { title: 'Approve progress', text: 'Each entry is a proposal until a company admin or project manager approves it.' },
+  { title: 'Analyse', text: 'S-curve and earned value update as soon as progress is approved. Risk analysis runs in one click.' },
+  { title: 'Back to P6', text: 'Export approved progress to P6 and reschedule there. The next import shows every logic change.' },
 ];
 
 const capabilities = [
-  { title: 'Scope-based access', text: 'Every user sees and edits only the activities they are responsible for, on the projects they are invited to.' },
-  { title: 'Change control with an audit trail', text: 'Who changed what, when, and who approved it. Logic edits never reach the schedule unreviewed.' },
-  { title: 'S-curve and earned value', text: 'Planned versus actual progress, SPI and CPI, recalculated for every update period.' },
-  { title: 'Risk analysis', text: 'Monte Carlo simulation gives P50 and P80 finish dates and shows which activities drive the risk.' },
-  { title: 'Reports and dashboards', text: 'Progress reports, look-aheads and project dashboards generated from every update, ready to download and share.' },
-  { title: 'AI-assisted actions', text: 'Plain-language summaries of what changed and suggested follow-ups for late or slipping scopes.' },
+  { title: 'Scope-based access', text: 'Subcontractors see and update only their own activities, defined by WBS or activity code rules.' },
+  { title: 'Progress approval', text: 'Progress entries wait in the approver\'s queue and reach the schedule only after a company admin or project manager approves them.' },
+  { title: 'Progress audit trail', text: 'Every field change is recorded with who made it, when, and the old and new value, along with who approved or rejected each entry.' },
+  { title: 'Logic change detection', text: 'Every link, lag and relationship type change between two updates, FS to SS included, listed for the planning team.' },
+  { title: 'S-curve and earned value', text: 'Planned versus actual progress, SPI and CPI, updated as soon as progress is approved.' },
+  { title: 'Risk analysis', text: 'Monte Carlo schedule risk analysis in one click, with P50 and P80 finish dates.' },
+  { title: 'Reports and dashboards', text: 'Project dashboards and progress reports built from approved data, ready to download and share.' },
+  { title: 'Optional AI assistant', text: 'Plain-language summaries and suggested follow-ups. Off by default and turned on only by your company admin.' },
 ];
 
 const audiences = [
-  { title: 'Owners and employers', text: 'A schedule you can trust each month, with reports and dashboards that explain every change.' },
+  { title: 'Owners and employers', text: 'A schedule you can trust each month, with every progress entry traceable to the person who made and approved it.' },
   { title: 'Main contractors', text: 'One update cycle for all subcontractors, without retyping their input into the schedule.' },
   { title: 'Project management consultants', text: 'Independent visibility of progress, logic changes, risk and forecast finish dates.' },
   { title: 'Planning and site engineers', text: 'Progress entered once, where the work happens, instead of passed along by email.' },
@@ -47,7 +49,7 @@ const audiences = [
 ---
 <Base
   title="POKO | Project Intelligence & Execution"
-  description="POKO is a project planning and management platform for construction. Every stakeholder updates their own part of the schedule, and analysis, reports, dashboards and risk forecasts are ready when the update period closes."
+  description="POKO is a project planning and management platform for construction. Every stakeholder enters progress on their own scope, the planning team approves it, and S-curve and earned value update straight away. Schedule logic stays with your planning team in P6."
 >
   <section class="hero">
     <div class="wrap hero__inner">
@@ -55,9 +57,9 @@ const audiences = [
         <p class="hero__category">Project Intelligence &amp; Execution</p>
         <h1>Know exactly what changed in your schedule, and why.</h1>
         <p class="hero__lede">
-          POKO is a project planning and management platform for construction. Every stakeholder updates their own part
-          of the schedule, logic changes wait for approval, and analysis, reports, dashboards and risk forecasts are ready
-          the moment the update period closes.
+          POKO is a project planning and management platform for construction. Every stakeholder enters progress on their
+          own scope, the planning team approves it, and S-curve and earned value update straight away. Schedule logic
+          stays with your planning team in P6.
         </p>
         <div class="hero__actions">
           <a href="/request-demo" class="btn btn--light">Request a demo</a>
@@ -77,9 +79,9 @@ const audiences = [
         <p class="truth__note">Starts with Primavera P6 schedules (.xer and .xml). Microsoft Project and Asta Powerproject import are on the way.</p>
       </div>
       <ol class="truth__flow" aria-label="How POKO works with your scheduling software">
-        <li><strong>Your schedule</strong><span>stays the single source of truth</span></li>
-        <li><strong>Scoped updates in POKO</strong><span>reviewed, approved, analysed</span></li>
-        <li><strong>One merged schedule</strong><span>exported back, ready to share</span></li>
+        <li><strong>Your schedule</strong><span>imported from P6, the single source of truth</span></li>
+        <li><strong>Progress in POKO</strong><span>entered by stakeholders, approved by your team</span></li>
+        <li><strong>Back to P6</strong><span>exported, rescheduled, imported again</span></li>
       </ol>
     </div>
   </section>
@@ -105,7 +107,7 @@ const audiences = [
     <div class="wrap">
       <div class="section__head">
         <h2>One update period, start to finish</h2>
-        <p>The same six steps every period, with every input traceable to the person who made it.</p>
+        <p>The same six steps every period, with every progress entry traceable to the person who made and approved it.</p>
       </div>
       <ol class="steps">
         {steps.map((s, i) => (

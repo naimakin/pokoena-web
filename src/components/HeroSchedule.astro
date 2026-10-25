@@ -1,6 +1,6 @@
 ---
-// Illustrative update-period view: baseline (outline) vs this update (filled).
-// Weeks 0–12. One logic change is held for approval.
+// Illustrative update comparison: previous update (outline) vs this update (filled).
+// Weeks 0–12. One logic change made in P6 is detected.
 const rows = [
   { name: 'Site mobilisation', owner: 'Main contractor', base: [0, 2], upd: [0, 2], state: 'done' },
   { name: 'Excavation & shoring', owner: 'Earthworks sub.', base: [1, 4], upd: [1, 5], state: 'done' },
@@ -12,7 +12,7 @@ const rows = [
 const weeks = 12;
 const dataDate = 5.5;
 const pct = (n: number) => `${(n / weeks) * 100}%`;
-const stateLabel: Record<string, string> = { done: 'Submitted', flag: 'Needs approval', open: 'In progress' };
+const stateLabel: Record<string, string> = { done: 'Submitted', flag: 'Logic changed', open: 'In progress' };
 ---
 <figure class="sched" aria-labelledby="sched-cap">
   <div class="sched__bar">
@@ -20,7 +20,7 @@ const stateLabel: Record<string, string> = { done: 'Submitted', flag: 'Needs app
     <span class="sched__count"><strong>4 of 6</strong> scopes submitted</span>
   </div>
 
-  <div class="sched__grid" role="table" aria-label="Schedule update: baseline versus current update">
+  <div class="sched__grid" role="table" aria-label="Schedule update: previous update versus this update">
     <div class="sched__row sched__row--head" role="row">
       <span role="columnheader">Activity</span>
       <span role="columnheader" class="sched__owner">Scope owner</span>
@@ -46,11 +46,11 @@ const stateLabel: Record<string, string> = { done: 'Submitted', flag: 'Needs app
 
   <figcaption id="sched-cap" class="sched__flag">
     <span class="sched__flagmark" aria-hidden="true"></span>
-    <span><strong>MEP rough-in:</strong> predecessor link changed from FS to SS +2w. The change is held until the planning admin approves it, so the one-week slip on the superstructure can't be hidden.</span>
+    <span><strong>Logic change found in this update.</strong> MEP rough-in: predecessor link changed in P6 from FS to SS +2w. POKO lists it next to the progress, so the one-week slip on the superstructure doesn't go unnoticed.</span>
   </figcaption>
 
   <p class="sched__legend" aria-hidden="true">
-    <span><i class="k k--base"></i>Baseline</span>
+    <span><i class="k k--base"></i>Previous update</span>
     <span><i class="k k--upd"></i>This update</span>
   </p>
 </figure>
