@@ -27,7 +27,7 @@ npx wrangler pages dev dist   # put RESEND_API_KEY in a .dev.vars file
 2. Framework preset: **Astro**. Build command `npm run build`, output directory `dist`.
 3. Settings → Variables and secrets:
    - `RESEND_API_KEY` (secret)
-   - `DEMO_TO_EMAIL` = `nakn@pokoena.com` (optional, this is the default)
+   - `DEMO_TO_EMAIL` = `info@pokoena.com` (optional, this is the default)
    - `DEMO_FROM_EMAIL` = `POKO Website <website@pokoena.com>` (optional, this is the default)
 4. Custom domains → add `pokoena.com` and `www.pokoena.com`.
 
@@ -37,5 +37,5 @@ npx wrangler pages dev dist   # put RESEND_API_KEY in a .dev.vars file
 2. Add the DNS records Resend shows (SPF/DKIM) in Cloudflare DNS.
 3. Create an API key and save it as `RESEND_API_KEY` in Cloudflare Pages.
 
-Requests arrive at `nakn@pokoena.com` with Reply-To set to the visitor's email.
-`nakn@pokoena.com` itself must be able to receive mail (for example via Cloudflare Email Routing).
+Requests arrive at `info@pokoena.com` with Reply-To set to the visitor's email.
+`info@pokoena.com` itself must be able to receive mail (for example via Cloudflare Email Routing).

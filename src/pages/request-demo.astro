@@ -16,7 +16,7 @@ import Base from '../layouts/Base.astro';
           <li>If you like, share a recent schedule (for example a Primavera P6 .xer export) and we'll run the demo on your own activities.</li>
           <li>No commitment and no sales sequence afterwards.</li>
         </ul>
-        <p class="demo__mail">Prefer email? Write to <a href="mailto:nakn@pokoena.com">nakn@pokoena.com</a>.</p>
+        <p class="demo__mail">Prefer email? Write to <a href="mailto:info@pokoena.com">info@pokoena.com</a>.</p>
       </div>
 
       <form class="form" id="demo-form" method="post" action="/api/demo" novalidate>
@@ -100,7 +100,7 @@ import Base from '../layouts/Base.astro';
         status.textContent = "Request sent. We'll reply to your email within one working day.";
         status.classList.add('is-ok');
       } catch (err) {
-        status.textContent = 'The request could not be sent. Try again, or email nakn@pokoena.com directly.';
+        status.textContent = 'The request could not be sent. Try again, or email info@pokoena.com directly.';
         status.classList.add('is-error');
       } finally {
         button.disabled = false;

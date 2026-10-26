@@ -3,7 +3,7 @@
 //
 // Environment variables (Cloudflare Pages > Settings > Variables and secrets):
 //   RESEND_API_KEY   secret, required
-//   DEMO_TO_EMAIL    where requests go          (default: nakn@pokoena.com)
+//   DEMO_TO_EMAIL    where requests go          (default: info@pokoena.com)
 //   DEMO_FROM_EMAIL  verified sender in Resend  (default: POKO Website <website@pokoena.com>)
 
 const MAX = { name: 120, email: 200, company: 160, role: 120, org_type: 80, message: 3000 };
@@ -69,7 +69,7 @@ export async function onRequestPost({ request, env }) {
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from: env.DEMO_FROM_EMAIL || 'POKO Website <website@pokoena.com>',
-      to: [env.DEMO_TO_EMAIL || 'nakn@pokoena.com'],
+      to: [env.DEMO_TO_EMAIL || 'info@pokoena.com'],
       reply_to: data.email,
       subject: `Demo request: ${data.company} (${data.name})`,
       text,
